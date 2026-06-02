@@ -5,11 +5,11 @@ import com.bhavy.banking_fraud_system.service.AuthService;
 import com.bhavy.banking_fraud_system.dto.RegisterRequest;import com.bhavy.banking_fraud_system.repository.UserRepository;import com.bhavy.banking_fraud_system.entity.User;
 import com.bhavy.banking_fraud_system.entity.Role;
 import java.time.LocalDateTime;import org.springframework.security.crypto.password.PasswordEncoder;import com.bhavy.banking_fraud_system.dto.LoginRequest;
-import com.bhavy.banking_fraud_system.dto.AuthResponse;
+import com.bhavy.banking_fraud_system.dto.AuthResponse;import com.bhavy.banking_fraud_system.service.JwtService;
 @RequiredArgsConstructor
 @Service
 public class AuthServiceImpl implements AuthService {
-
+    private final JwtService jwtService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     @Override
@@ -26,7 +26,9 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Invalid password");
         }
 
-        return new AuthResponse("Login Successful");
+        String token = jwtService.generateToken(user.getEmail());
+
+        return new AuthResponse(token);
     }
     @Override
     public void register(RegisterRequest request) {
