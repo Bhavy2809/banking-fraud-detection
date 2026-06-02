@@ -3,6 +3,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;import com.bhavy.banking_fraud_system.service.AuthService;import com.bhavy.banking_fraud_system.dto.RegisterRequest;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;import com.bhavy.banking_fraud_system.dto.LoginRequest;
+import com.bhavy.banking_fraud_system.dto.AuthResponse;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/api/auth")
@@ -12,10 +15,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request){
-
+    public String register(@RequestBody RegisterRequest request) {
         authService.register(request);
-
         return "User registered successfully";
+    }
+
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody LoginRequest request) {
+        return authService.login(request);
     }
 }
