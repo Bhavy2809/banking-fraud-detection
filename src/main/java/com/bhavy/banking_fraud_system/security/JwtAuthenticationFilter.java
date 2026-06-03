@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import com.bhavy.banking_fraud_system.service.JwtService;
-import java.io.IOException;
+import java.io.IOException;import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.List;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,6 +45,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String email =
                     jwtService.extractUsername(jwt);
 
+            String role =
+                    jwtService.extractRole(jwt);
+
             System.out.println(
                     "Authenticated User: " + email
             );
@@ -53,7 +56,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(
                             email,
                             null,
-                            List.of()
+                            List.of(
+                                    new SimpleGrantedAuthority(
+                                            "ROLE_" + role
+                                    )
+                            )
                     );
 
             SecurityContextHolder

@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
-
+import com.bhavy.banking_fraud_system.entity.User;
 import javax.crypto.SecretKey;
 import java.util.Date;
 
@@ -14,10 +14,11 @@ public class JwtService {
     private static final String SECRET_KEY =
             "mySuperSecretKeyForBankingFraudSystemProject123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    public String generateToken(String email) {
+    public String generateToken(User user) {
 
         return Jwts.builder()
-                .subject(email)
+                .subject(user.getEmail())
+                .claim("role", user.getRole().name())
                 .issuedAt(new Date())
                 .expiration(
                         new Date(
@@ -47,7 +48,17 @@ public class JwtService {
 
         return claims.getSubject();
     }
+    public String extractRole(String token) {
 
+        Claims claims =
+                Jwts.parser()
+                        .verifyWith(getSignInKey())
+                        .build()
+                        .parseSignedClaims(token)
+                        .getPayload();
+
+        return claims.get("role", String.class);
+    }
     public boolean isTokenValid(String token) {
 
         try {
