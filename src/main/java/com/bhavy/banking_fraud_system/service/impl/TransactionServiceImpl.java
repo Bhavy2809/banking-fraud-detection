@@ -62,5 +62,29 @@ public class TransactionServiceImpl
     public List<Transaction> getAllTransactions() {
 
         return transactionRepository.findAll();
+    }@Override
+    public long getTotalTransactions() {
+
+        return transactionRepository.count();
+    }
+
+    @Override
+    public long getFraudTransactionsCount() {
+
+        return transactionRepository.countByIsFraud(true);
+    }
+
+    @Override
+    public double getFraudPercentage() {
+
+        long total = transactionRepository.count();
+
+        long fraud = getFraudTransactionsCount();
+
+        if(total == 0) {
+            return 0;
+        }
+
+        return ((double) fraud / total) * 100;
     }
 }

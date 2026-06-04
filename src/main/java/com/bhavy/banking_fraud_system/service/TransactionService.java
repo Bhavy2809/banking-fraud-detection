@@ -5,11 +5,15 @@ import java.util.List;
 import com.bhavy.banking_fraud_system.entity.Transaction;
 public interface TransactionService {
 
-    void createTransaction(
-            TransactionRequest request
-    );
+    void createTransaction(TransactionRequest request);
 
     List<Transaction> getAllTransactions();
 
     List<Transaction> getFraudTransactions();
+
+    long getTotalTransactions();
+
+    long getFraudTransactionsCount();
+
+    double getFraudPercentage();
 }
