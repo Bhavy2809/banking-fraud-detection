@@ -52,7 +52,12 @@ public class TransactionServiceImpl
 
         transactionRepository.save(transaction);
     }
+    @Override
+    public List<Transaction> getFraudTransactions() {
 
+        return transactionRepository
+                .findByIsFraudTrue();
+    }
     @Override
     public List<Transaction> getAllTransactions() {
 

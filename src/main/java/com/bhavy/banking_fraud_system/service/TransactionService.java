@@ -10,4 +10,6 @@ public interface TransactionService {
     );
 
     List<Transaction> getAllTransactions();
+
+    List<Transaction> getFraudTransactions();
 }

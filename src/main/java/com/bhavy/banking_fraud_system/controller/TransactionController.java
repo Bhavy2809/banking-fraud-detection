@@ -21,7 +21,12 @@ public class TransactionController {
 
         return "Transaction Saved";
     }
+    @GetMapping("/fraud")
+    public List<Transaction> getFraudTransactions() {
 
+        return transactionService
+                .getFraudTransactions();
+    }
     @GetMapping
     public List<Transaction> getAllTransactions() {
 
