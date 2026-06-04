@@ -72,6 +72,8 @@ public class JwtService {
 
         } catch (Exception e) {
 
+            e.printStackTrace();
+
             return false;
         }
     }

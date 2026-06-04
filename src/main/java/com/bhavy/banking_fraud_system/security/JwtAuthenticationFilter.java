@@ -45,9 +45,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String email =
                     jwtService.extractUsername(jwt);
 
-            String role =
-                    jwtService.extractRole(jwt);
-
             System.out.println(
                     "Authenticated User: " + email
             );
@@ -56,16 +53,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(
                             email,
                             null,
-                            List.of(
-                                    new SimpleGrantedAuthority(
-                                            "ROLE_" + role
-                                    )
-                            )
+                            List.of()
                     );
 
             SecurityContextHolder
                     .getContext()
                     .setAuthentication(authToken);
+
+        } else {
+
+            System.out.println("TOKEN INVALID");
         }
 
         filterChain.doFilter(request,response);

@@ -26,7 +26,7 @@ public class Transaction {
 
     private LocalDateTime transactionTime;
 
-    private Double fraudScore;
+    private Integer fraudScore;
 
     private Boolean isFraud;
 

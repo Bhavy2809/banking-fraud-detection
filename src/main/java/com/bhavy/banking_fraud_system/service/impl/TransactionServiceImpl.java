@@ -1,5 +1,5 @@
 package com.bhavy.banking_fraud_system.service.impl;
-
+import com.bhavy.banking_fraud_system.service.FraudDetectionService;
 import com.bhavy.banking_fraud_system.dto.TransactionRequest;
 import com.bhavy.banking_fraud_system.entity.Transaction;
 import com.bhavy.banking_fraud_system.repository.TransactionRepository;
@@ -15,10 +15,20 @@ public class TransactionServiceImpl
         implements TransactionService {
 
     private final TransactionRepository transactionRepository;
-
+    private final FraudDetectionService fraudDetectionService;
     @Override
     public void createTransaction(
             TransactionRequest request) {
+
+        int fraudScore =
+                fraudDetectionService.calculateFraudScore(
+                        request.getAmount()
+                );
+
+        boolean isFraud =
+                fraudDetectionService.isFraud(
+                        request.getAmount()
+                );
 
         Transaction transaction =
                 Transaction.builder()
@@ -34,8 +44,8 @@ public class TransactionServiceImpl
                         .transactionTime(
                                 LocalDateTime.now()
                         )
-                        .fraudScore(0.0)
-                        .isFraud(false)
+                        .fraudScore(fraudScore)
+                        .isFraud(isFraud)
                         .status("SUCCESS")
                         .build();
 
