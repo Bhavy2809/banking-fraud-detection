@@ -1,5 +1,6 @@
 package com.bhavy.banking_fraud_system.controller;
-
+import java.util.List;
+import com.bhavy.banking_fraud_system.entity.Transaction;
 import com.bhavy.banking_fraud_system.dto.TransactionRequest;
 import com.bhavy.banking_fraud_system.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,11 @@ public class TransactionController {
         transactionService.createTransaction(request);
 
         return "Transaction Saved";
+    }
+
+    @GetMapping
+    public List<Transaction> getAllTransactions() {
+
+        return transactionService.getAllTransactions();
     }
 }

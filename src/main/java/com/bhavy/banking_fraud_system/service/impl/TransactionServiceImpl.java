@@ -6,7 +6,7 @@ import com.bhavy.banking_fraud_system.repository.TransactionRepository;
 import com.bhavy.banking_fraud_system.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 import java.time.LocalDateTime;
 
 @Service
@@ -19,7 +19,8 @@ public class TransactionServiceImpl
     @Override
     public void createTransaction(
             TransactionRequest request) {
-
+        System.out.println("REQUEST = " + request);
+        System.out.println("AMOUNT = " + request.getAmount());
         int fraudScore =
                 fraudDetectionService.calculateFraudScore(
                         request.getAmount()
@@ -50,5 +51,11 @@ public class TransactionServiceImpl
                         .build();
 
         transactionRepository.save(transaction);
+    }
+
+    @Override
+    public List<Transaction> getAllTransactions() {
+
+        return transactionRepository.findAll();
     }
 }
