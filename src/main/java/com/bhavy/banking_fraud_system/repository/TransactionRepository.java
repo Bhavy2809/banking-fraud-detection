@@ -1,5 +1,6 @@
 package com.bhavy.banking_fraud_system.repository;
-
+import java.time.LocalDateTime;
+import java.util.List;
 import com.bhavy.banking_fraud_system.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
@@ -11,4 +12,8 @@ public interface TransactionRepository
     List<Transaction> findByIsFraudTrue();
 
     long countByIsFraud(boolean isFraud);
+
+    List<Transaction> findByTransactionTimeAfter(
+            LocalDateTime dateTime
+    );
 }

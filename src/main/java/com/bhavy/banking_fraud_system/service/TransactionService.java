@@ -12,7 +12,11 @@ public interface TransactionService {
     List<Transaction> getFraudTransactions();
 
     long getTotalTransactions();
+    List<Transaction> getTodayTransactions();
 
+    List<Transaction> getWeekTransactions();
+
+    List<Transaction> getMonthTransactions();
     long getFraudTransactionsCount();
     DashboardResponse getDashboardStats();
     double getFraudPercentage();

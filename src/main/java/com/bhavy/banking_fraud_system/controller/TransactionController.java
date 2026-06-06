@@ -18,7 +18,12 @@ public class TransactionController {
         return transactionService
                 .getTotalTransactions();
     }
+    @GetMapping("/today")
+    public List<Transaction> getTodayTransactions() {
 
+        return transactionService
+                .getTodayTransactions();
+    }
     @GetMapping("/stats/fraud-count")
     public long getFraudTransactionsCount() {
 
@@ -55,5 +60,15 @@ public class TransactionController {
     public List<Transaction> getAllTransactions() {
 
         return transactionService.getAllTransactions();
+    }@GetMapping("/week")
+    public List<Transaction> getWeekTransactions() {
+
+        return transactionService
+                .getWeekTransactions();
+    }@GetMapping("/month")
+    public List<Transaction> getMonthTransactions() {
+
+        return transactionService
+                .getMonthTransactions();
     }
 }
