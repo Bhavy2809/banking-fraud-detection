@@ -12,7 +12,26 @@ import org.springframework.web.bind.annotation.*;
 public class TransactionController {
 
     private final TransactionService transactionService;
+    @GetMapping("/stats/total")
+    public long getTotalTransactions() {
 
+        return transactionService
+                .getTotalTransactions();
+    }
+
+    @GetMapping("/stats/fraud-count")
+    public long getFraudTransactionsCount() {
+
+        return transactionService
+                .getFraudTransactionsCount();
+    }
+
+    @GetMapping("/stats/fraud-percentage")
+    public double getFraudPercentage() {
+
+        return transactionService
+                .getFraudPercentage();
+    }
     @PostMapping
     public String createTransaction(
             @RequestBody TransactionRequest request) {

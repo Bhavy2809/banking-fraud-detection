@@ -33,7 +33,8 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/user/**")
                         .hasAnyRole("USER", "ADMIN")
-
+                        .requestMatchers("/api/transactions/**")
+                        .hasAnyRole("USER","ADMIN")
                         .anyRequest()
                         .authenticated()
                 )
