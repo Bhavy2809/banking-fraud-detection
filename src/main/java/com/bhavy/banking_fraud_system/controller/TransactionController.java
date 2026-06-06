@@ -5,7 +5,7 @@ import com.bhavy.banking_fraud_system.dto.TransactionRequest;
 import com.bhavy.banking_fraud_system.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
+import com.bhavy.banking_fraud_system.dto.DashboardResponse;
 @RestController
 @RequestMapping("/api/transactions")
 @RequiredArgsConstructor
@@ -25,7 +25,12 @@ public class TransactionController {
         return transactionService
                 .getFraudTransactionsCount();
     }
+    @GetMapping("/dashboard")
+    public DashboardResponse getDashboardStats() {
 
+        return transactionService
+                .getDashboardStats();
+    }
     @GetMapping("/stats/fraud-percentage")
     public double getFraudPercentage() {
 

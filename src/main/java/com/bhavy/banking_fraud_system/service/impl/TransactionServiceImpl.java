@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.time.LocalDateTime;
-
+import com.bhavy.banking_fraud_system.dto.DashboardResponse;
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl
@@ -73,7 +73,30 @@ public class TransactionServiceImpl
 
         return transactionRepository.countByIsFraud(true);
     }
+    @Override
+    public DashboardResponse getDashboardStats() {
 
+        long total =
+                transactionRepository.count();
+
+        long fraud =
+                transactionRepository
+                        .countByIsFraud(true);
+
+        double percentage = 0;
+
+        if(total > 0) {
+
+            percentage =
+                    ((double) fraud / total) * 100;
+        }
+
+        return new DashboardResponse(
+                total,
+                fraud,
+                percentage
+        );
+    }
     @Override
     public double getFraudPercentage() {
 
