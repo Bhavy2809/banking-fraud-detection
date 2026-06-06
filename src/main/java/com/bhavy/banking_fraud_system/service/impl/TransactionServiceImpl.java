@@ -7,8 +7,9 @@ import com.bhavy.banking_fraud_system.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import com.bhavy.banking_fraud_system.dto.DashboardResponse;import java.time.LocalDateTime;
+import com.bhavy.banking_fraud_system.dto.DashboardResponse;
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl
@@ -143,5 +144,41 @@ public class TransactionServiceImpl
                 .findByTransactionTimeAfter(
                         oneMonthAgo
                 );
+    }@Override
+    public long getTodayFraudCount() {
+
+        LocalDateTime startOfDay =
+                LocalDate.now()
+                        .atStartOfDay();
+
+        return transactionRepository
+                .findByIsFraudTrueAndTransactionTimeAfter(
+                        startOfDay
+                )
+                .size();
+    }@Override
+    public long getWeekFraudCount() {
+
+        LocalDateTime oneWeekAgo =
+                LocalDateTime.now()
+                        .minusDays(7);
+
+        return transactionRepository
+                .findByIsFraudTrueAndTransactionTimeAfter(
+                        oneWeekAgo
+                )
+                .size();
+    }@Override
+    public long getMonthFraudCount() {
+
+        LocalDateTime oneMonthAgo =
+                LocalDateTime.now()
+                        .minusDays(30);
+
+        return transactionRepository
+                .findByIsFraudTrueAndTransactionTimeAfter(
+                        oneMonthAgo
+                )
+                .size();
     }
 }

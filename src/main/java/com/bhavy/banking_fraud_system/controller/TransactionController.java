@@ -70,5 +70,20 @@ public class TransactionController {
 
         return transactionService
                 .getMonthTransactions();
+    }@GetMapping("/fraud/today")
+    public long getTodayFraudCount() {
+
+        return transactionService
+                .getTodayFraudCount();
+    }@GetMapping("/fraud/week")
+    public long getWeekFraudCount() {
+
+        return transactionService
+                .getWeekFraudCount();
+    }@GetMapping("/fraud/month")
+    public long getMonthFraudCount() {
+
+        return transactionService
+                .getMonthFraudCount();
     }
 }
