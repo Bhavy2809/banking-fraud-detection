@@ -1,21 +1,22 @@
 package com.bhavy.banking_fraud_system.service;
 
+import com.bhavy.banking_fraud_system.service.ml.MlPredictionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class FraudDetectionService {
+
+    private final MlPredictionService mlPredictionService;
 
     public int calculateFraudScore(Double amount) {
 
-        if(amount > 100000) {
-            return 90;
-        }
+        double probability =
+                mlPredictionService
+                        .predictFraudProbability(amount);
 
-        if(amount > 50000) {
-            return 60;
-        }
-
-        return 10;
+        return (int)(probability * 100);
     }
 
     public boolean isFraud(Double amount) {
