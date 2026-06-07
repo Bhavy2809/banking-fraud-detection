@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalDateTime;import org.springframework.data.domain.PageRequest;
 import com.bhavy.banking_fraud_system.dto.DashboardResponse;import com.bhavy.banking_fraud_system.dto.FraudSummaryResponse;
 @Service
 @RequiredArgsConstructor
@@ -196,5 +196,12 @@ public class TransactionServiceImpl
                 getWeekFraudCount(),
                 getMonthFraudCount()
         );
+    }@Override
+    public List<Transaction> getTopRiskTransactions() {
+
+        return transactionRepository
+                .findByOrderByFraudScoreDesc(
+                        PageRequest.of(0,5)
+                );
     }
 }

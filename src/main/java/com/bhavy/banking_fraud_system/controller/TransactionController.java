@@ -94,5 +94,10 @@ public class TransactionController {
     public FraudSummaryResponse getFraudSummary() {
 
         return transactionService.getFraudSummary();
+    }@GetMapping("/top-risk")
+    public List<Transaction> getTopRiskTransactions() {
+
+        return transactionService
+                .getTopRiskTransactions();
     }
 }
