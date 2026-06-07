@@ -203,5 +203,12 @@ public class TransactionServiceImpl
                 .findByOrderByFraudScoreDesc(
                         PageRequest.of(0,5)
                 );
+    }@Override
+    public List<Transaction>
+    getTransactionsByAccount(
+                    String accountNumber) {
+
+        return transactionRepository
+                .findBySenderAccount(accountNumber);
     }
 }

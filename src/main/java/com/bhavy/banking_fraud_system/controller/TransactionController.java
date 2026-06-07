@@ -99,5 +99,12 @@ public class TransactionController {
 
         return transactionService
                 .getTopRiskTransactions();
+    }@GetMapping("/account/{accountNumber}")
+    public List<Transaction>
+    getTransactionsByAccount(
+                    @PathVariable String accountNumber) {
+
+        return transactionService
+                .getTransactionsByAccount(accountNumber);
     }
 }

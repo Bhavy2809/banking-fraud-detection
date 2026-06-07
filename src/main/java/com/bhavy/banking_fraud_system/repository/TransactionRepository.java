@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;import org.springframework.data
 @Repository
 public interface TransactionRepository
         extends JpaRepository<Transaction, Long> {
-
+    List<Transaction>
+    findBySenderAccount(String senderAccount);
     List<Transaction> findByIsFraudTrue();
     List<Transaction> findByOrderByFraudScoreDesc(Pageable pageable);
     long countByIsFraud(boolean isFraud);
