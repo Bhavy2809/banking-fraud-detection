@@ -180,5 +180,10 @@ public class TransactionServiceImpl
                         oneMonthAgo
                 )
                 .size();
+    }@Override
+    public List<Transaction> getRecentFraudTransactions() {
+
+        return transactionRepository
+                .findTop5ByIsFraudTrueOrderByTransactionTimeDesc();
     }
 }

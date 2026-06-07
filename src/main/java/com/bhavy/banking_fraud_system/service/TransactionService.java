@@ -18,7 +18,7 @@ public interface TransactionService {
     long getTodayFraudCount();
 
     long getWeekFraudCount();
-
+    List<Transaction> getRecentFraudTransactions();
     long getMonthFraudCount();
     List<Transaction> getMonthTransactions();
     long getFraudTransactionsCount();

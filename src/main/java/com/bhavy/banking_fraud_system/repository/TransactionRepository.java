@@ -16,7 +16,7 @@ public interface TransactionRepository
     List<Transaction> findByTransactionTimeAfter(
             LocalDateTime dateTime
     );
-
+    List<Transaction> findTop5ByIsFraudTrueOrderByTransactionTimeDesc();
     List<Transaction> findByIsFraudTrueAndTransactionTimeAfter(
             LocalDateTime dateTime
     );

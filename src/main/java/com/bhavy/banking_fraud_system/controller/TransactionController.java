@@ -85,5 +85,10 @@ public class TransactionController {
 
         return transactionService
                 .getMonthFraudCount();
+    }@GetMapping("/recent-frauds")
+    public List<Transaction> getRecentFraudTransactions() {
+
+        return transactionService
+                .getRecentFraudTransactions();
     }
 }
