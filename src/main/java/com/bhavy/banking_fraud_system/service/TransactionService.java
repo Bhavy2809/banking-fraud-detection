@@ -1,7 +1,7 @@
 package com.bhavy.banking_fraud_system.service;
 import com.bhavy.banking_fraud_system.dto.DashboardResponse;
 import com.bhavy.banking_fraud_system.dto.TransactionRequest;
-import java.util.List;
+import java.util.List;import com.bhavy.banking_fraud_system.dto.FraudSummaryResponse;
 import com.bhavy.banking_fraud_system.entity.Transaction;
 public interface TransactionService {
 
@@ -16,7 +16,7 @@ public interface TransactionService {
 
     List<Transaction> getWeekTransactions();
     long getTodayFraudCount();
-
+    FraudSummaryResponse getFraudSummary();
     long getWeekFraudCount();
     List<Transaction> getRecentFraudTransactions();
     long getMonthFraudCount();

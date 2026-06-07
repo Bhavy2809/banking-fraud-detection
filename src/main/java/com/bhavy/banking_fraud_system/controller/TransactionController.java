@@ -5,7 +5,7 @@ import com.bhavy.banking_fraud_system.dto.TransactionRequest;
 import com.bhavy.banking_fraud_system.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import com.bhavy.banking_fraud_system.dto.DashboardResponse;
+import com.bhavy.banking_fraud_system.dto.DashboardResponse;import com.bhavy.banking_fraud_system.dto.FraudSummaryResponse;
 @RestController
 @RequestMapping("/api/transactions")
 @RequiredArgsConstructor
@@ -90,5 +90,9 @@ public class TransactionController {
 
         return transactionService
                 .getRecentFraudTransactions();
+    }@GetMapping("/fraud-summary")
+    public FraudSummaryResponse getFraudSummary() {
+
+        return transactionService.getFraudSummary();
     }
 }

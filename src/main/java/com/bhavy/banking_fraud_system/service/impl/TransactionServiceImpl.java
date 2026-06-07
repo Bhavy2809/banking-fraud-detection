@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import com.bhavy.banking_fraud_system.dto.DashboardResponse;
+import com.bhavy.banking_fraud_system.dto.DashboardResponse;import com.bhavy.banking_fraud_system.dto.FraudSummaryResponse;
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl
@@ -185,5 +185,16 @@ public class TransactionServiceImpl
 
         return transactionRepository
                 .findTop5ByIsFraudTrueOrderByTransactionTimeDesc();
+    }@Override
+    public FraudSummaryResponse getFraudSummary() {
+
+        return new FraudSummaryResponse(
+                getTotalTransactions(),
+                getFraudTransactionsCount(),
+                getFraudPercentage(),
+                getTodayFraudCount(),
+                getWeekFraudCount(),
+                getMonthFraudCount()
+        );
     }
 }
